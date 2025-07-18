@@ -59,7 +59,7 @@ sealed class LoadState {
     data class Error(val message: String) : LoadState()
 }
 
-@SuppressLint("SetJavaScriptEnabled")
+@SuppressLint("SetJavaScriptEnabled", "ClickableViewAccessibility")
 @Composable
 fun WebViewScreen(
     onError: (String) -> Unit,
@@ -106,6 +106,9 @@ fun WebViewScreen(
                             onError(error.description?.toString() ?: "Errore sconosciuto")
                         }
                     }
+                }
+                webView.setOnTouchListener { _, event ->
+                    event.pointerCount > 1
                 }
                 isLoading = true
                 webView.loadUrl(url)
