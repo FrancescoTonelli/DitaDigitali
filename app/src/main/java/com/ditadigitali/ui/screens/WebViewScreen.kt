@@ -10,9 +10,6 @@ import android.webkit.WebViewClient
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -25,14 +22,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.ditadigitali.ui.components.FloatingButton
 import com.ditadigitali.ui.theme.Primary
 import com.ditadigitali.utils.NetworkUtil
 import kotlinx.coroutines.launch
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.ui.unit.dp
+import com.ditadigitali.ui.components.FloatingButton
 
 class WebViewViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -102,9 +102,7 @@ fun WebViewScreen(
                     override fun onReceivedError(
                         view: WebView, request: WebResourceRequest, error: WebResourceError
                     ) {
-                        if (request.isForMainFrame) {
-                            onError(error.description?.toString() ?: "Errore sconosciuto")
-                        }
+                        onError(error.description?.toString() ?: "Errore sconosciuto")
                     }
                 }
                 webView.setOnTouchListener { _, event ->
@@ -124,7 +122,7 @@ fun WebViewScreen(
                             webView.reload()
                         },
                         modifier = Modifier
-                            .align(Alignment.TopEnd)
+                            .align(Alignment.BottomEnd)
                             .padding(16.dp),
                         icon = Icons.Default.Refresh,
                         contentDescription = "Ricarica"
