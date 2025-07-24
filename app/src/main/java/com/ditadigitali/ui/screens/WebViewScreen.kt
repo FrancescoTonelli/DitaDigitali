@@ -2,6 +2,7 @@ package com.ditadigitali.ui.screens
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.view.ViewGroup
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebSettings
@@ -94,6 +95,7 @@ fun WebViewScreen(
                     javaScriptEnabled = true
                     domStorageEnabled = true
                     cacheMode = WebSettings.LOAD_NO_CACHE
+
                 }
                 webView.webViewClient = object : WebViewClient() {
                     override fun onPageFinished(view: WebView?, url: String?) {
@@ -104,6 +106,14 @@ fun WebViewScreen(
                     ) {
                         onError(error.description?.toString() ?: "Errore sconosciuto")
                     }
+                }
+                webView.apply {
+                    isVerticalScrollBarEnabled = false
+                    isHorizontalScrollBarEnabled = false
+                    layoutParams = ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.MATCH_PARENT
+                    )
                 }
                 webView.setOnTouchListener { _, event ->
                     event.pointerCount > 1
